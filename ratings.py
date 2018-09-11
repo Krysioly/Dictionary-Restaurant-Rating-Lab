@@ -29,16 +29,24 @@ def make_restaurant_ratings_dict(input_file):
 
 def add_new_restaurant(ratings_dict):
     new_restaurant = input("What is your restaurant name?: ").title()
-    new_rating = input("What do you rate your restaurant on a scale of 1 to 5?: ")
+
+    # Throw away value to enter loop - immediately overwritten
+    new_rating = 100
+
+    while new_rating < 0 or new_rating > 5:
+        try:
+            new_rating = int(input("What do you rate your restaurant on a scale of 1 to 5?: "))
+        except ValueError:
+            print("Try again, this time with an integer.")
+            new_rating = int(input("What do you rate your restaurant on a scale of 1 to 5?: "))
 
     ratings_dict[new_restaurant] = new_rating
     return ratings_dict
 
 
 def sort_and_print_restaurants(ratings_dict):
-    sorted_restaurants_list = sorted(ratings_dict)
 
-    for restaurant in sorted_restaurants_list:
+    for restaurant in sorted(ratings_dict):
         rating = ratings_dict[restaurant]
         print("{} is rated at {}.".format(restaurant, rating))
 
