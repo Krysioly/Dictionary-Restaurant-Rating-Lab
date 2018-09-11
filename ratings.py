@@ -54,10 +54,20 @@ def sort_and_print_restaurants(ratings_dict):
 def rating_restaurants(input_file):
 
     ratings_dictionary = make_restaurant_ratings_dict(input_file)
+    while True:
+        print("\n[S]ee all the ratings")
+        print("[A]dd restaurant")
+        print("[Q]uit")
 
-    ratings_dictionary = add_new_restaurant(ratings_dictionary)
+        choice= input("\nWhat would you like to do? \n").upper()
 
-    sort_and_print_restaurants(ratings_dictionary)
-
+        if choice == "A":
+            ratings_dictionary = add_new_restaurant(ratings_dictionary)
+        elif choice == "S":
+            sort_and_print_restaurants(ratings_dictionary)
+        elif choice == "Q":
+            return False
+        else:
+            print("Please choose from the available options")
 
 rating_restaurants(sys.argv[1])
